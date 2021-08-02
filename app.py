@@ -9,6 +9,9 @@ from nltk.tokenize import word_tokenize
 from itertools import chain
 from nltk.corpus import wordnet
 from sklearn.neighbors import KNeighborsClassifier
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
 
 nlp = spacy.load('en_core_web_sm')
 
@@ -365,6 +368,16 @@ def chat_sp():
                 a=False
                 print("§ Thanks for using ower application § ")
 
+@app.route("/")
+def home():
+	return render_template("home.html")
+
+@app.route("/get")
+def get_bot_response():
+	userText = request.args.get('msg')
+	return str('hi')
+
+
 if __name__ == "__main__":
-    chat_sp()
-    
+    #chat_sp()
+    app.run()
