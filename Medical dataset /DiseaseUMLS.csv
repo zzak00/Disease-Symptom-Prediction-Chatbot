@@ -1,0 +1,150 @@
+Disease,UMLSD
+hypertensive disease,C0020538
+diabetes,C0011847
+depression mental,C0011570
+coronary arteriosclerosis,C0010054
+pneumonia,C0032285
+failure heart congestive,C0018802
+accident cerebrovascular,C0038454
+asthma,C0004096
+myocardial infarction,C0027051
+hypercholesterolemia,C0020443
+infection,C0021311
+infection urinary tract,C0042029
+anemia,C0002871
+chronic obstructive airway disease,C0024117
+dementia,C0497327
+insufficiency renal,C1565489
+confusion,C0009676
+degenerative polyarthritis,C0029408
+hypothyroidism,C0020676
+anxiety state,C0700613
+malignant neoplasms,C0006826
+acquired immuno-deficiency syndrome,C0001175
+cellulitis,C0007642
+gastroesophageal reflux disease,C0017168
+septicemia,C0036690
+deep vein thrombosis,C0149871
+dehydration,C0011175
+neoplasm,C0027651
+embolism pulmonary,C0034065
+epilepsy,C0014544
+cardiomyopathy,C0878544
+chronic kidney failure,C0022661
+carcinoma,C0007097
+hepatitis C,C0019196
+peripheral vascular disease,C0085096
+psychotic disorder,C0033975
+hyperlipidemia,C0020473
+bipolar disorder,C0005586
+obesity,C0028754
+ischemia,C0022116
+cirrhosis,C1623038
+exanthema,C0015230
+benign prostatic hypertrophy,C0005001
+kidney failure acute,C0022660
+mitral valve insufficiency,C0026266
+arthritis,C0003864
+bronchitis,C0006277
+hemiparesis,C0018989
+osteoporosis,C0029456
+transient ischemic attack,C0007787
+adenocarcinoma,C0001418
+paranoia,C1456784
+pancreatitis,C0030305
+incontinence,C0021167
+paroxysmal dyspnea,C0013405
+hernia,C0019270
+malignant neoplasm of prostate,C0376358
+edema pulmonary,C0034063
+lymphatic diseases,C0024228
+stenosis aortic valve,C0003507
+malignant neoplasm of breast,C0006142
+schizophrenia,C0036341
+diverticulitis,C0012813
+overload fluid,C0546817
+ulcer peptic,C0030920
+osteomyelitis,C0029443
+gastritis,C0017152
+bacteremia,C0004610
+failure kidney,C0035078
+sickle cell anemia,C0002895
+failure heart,C0018801
+upper respiratory infection,C0041912
+hepatitis,C0019158
+hypertension pulmonary,C0020542
+deglutition disorder,C0011168
+gout,C0018099
+thrombocytopaenia,C0040034
+hypoglycemia,C0020615
+pneumonia aspiration,C0032290
+colitis,C0009319
+diverticulosis,C1510475
+suicide attempt,C0038663
+Pneumocystis carinii pneumonia,C0032305
+hepatitis B,C0019163
+parkinson disease,C0030567
+lymphoma,C0024299
+hyperglycemia,C0020456
+encephalopathy,C0085584
+tricuspid valve insufficiency,C0040961
+Alzheimer's disease,C0002395
+candidiasis,C0006840
+neuropathy,C0442874
+kidney disease,C0022658
+fibroid tumor,C0023267
+glaucoma,C0017601
+neoplasm metastasis,C0027627
+malignant tumor of colon,C0007102
+ketoacidosis diabetic,C0011880
+tonic-clonic epilepsy,C0014549
+malignant neoplasms,C0006826
+respiratory failure,C1145670
+melanoma,C0025202
+gastroenteritis,C0017160
+malignant neoplasm of lung,C0242379
+manic disorder,C0024713
+personality disorder,C0031212
+primary carcinoma of the liver cells,C0019204
+emphysema pulmonary,C0034067
+hemorrhoids,C0019112
+spasm bronchial,C0006266
+aphasia,C0003537
+obesity morbid,C0028756
+pyelonephritis,C0034186
+endocarditis,C0014118
+effusion pericardial,C0031039
+chronic alcoholic intoxication,C0001973
+pneumothorax,C0032326
+delirium,C0011206
+neutropenia,C0027947
+hyperbilirubinemia,C0020433
+influenza,C0021400
+dependence,C0439857
+thrombus,C0087086
+cholecystitis,C0008325
+hernia hiatal,C0019291
+migraine disorders,C0149931
+pancytopenia,C0030312
+cholelithiasis,C0008350
+tachycardia sinus,C0039239
+ileus,C1258215
+adhesion,C0001511
+delusion,C0011253
+affect labile,C0233472
+decubitus ulcer,C0011127
+depressive disorder,C0011581
+coronary heart disease,C0010068
+primary malignant neoplasm,C1306459
+HIV,C0019682
+systemic infection,C0243026
+carcinoma prostate,C0600139
+carcinoma breast,C0678222
+oralcandidiasis,C0006849
+carcinoma colon,C0699790
+tonic-clonic seizures,C0494475
+carcinoma of lung,C0684249
+pericardial effusion body substance,C1253937
+biliary calculus,C0242216
+hiv infections,C0019693
+sepsis (invertebrate),C1090821
