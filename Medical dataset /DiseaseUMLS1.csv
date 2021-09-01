@@ -1,0 +1,313 @@
+Disease_CUI,Disease
+C0162565,"porphyria, acute intermittent"
+C0162566,porphyria cutanea tarda
+C0004238,atrial fibrillation
+C0023212,left heart failure
+C0235527,right heart failure
+C0018801,heart failure
+C0007194,hypertrophic cardiomyopathy
+C0007196,"cardiomyopathy, restrictive"
+C0007193,dilated cardiomyopathy
+C0024790,paroxysmal nocturnal hemoglobinuria
+C0037889,anemia globular cell
+C1268964,myelodysplastic syndrome not classifiable
+C0947845,acute and chronic sarcoid
+C0340164,loefgren syndrome
+C0042171,heerfordt syndrome
+C0085278,antiphospholipid syndrome
+C0034155,"microangiopathy, thrombotic"
+C0020532,hypersplenism
+C0032227,pleural effusion
+C0034063,pulmonary edema
+C0032326,pneumothorax
+C0877430,chronic asthma
+C0024117,copd
+C0032285,pneumonia
+C0034067,emphysema
+C0034069,pulmonary fibrosis
+C0034065,pulmonary embolism
+C0149514,acute bronchitis
+C0006271,bronchiolitis
+C0343528,pontiac - fever
+C0023241,pneumonia due to legionella
+C0857946,atypical pneumonia
+C1535939,pneumocystis jirovecii - pneumonia
+C0041296,tuberculosis
+C0041333,"tuberculosis, urogenital"
+C1740806,atypical mycobacteriosis
+C0027145,myxoedem
+C0002390,"alveolitis, exogenous - allergic"
+C0002390,exogenous - allergic alveolitis
+C0043167,pertussis
+C0017150,gastrinoma
+C0085695,chronic gastritis
+C0023788,whipple's disease
+C0235950,zinc deficiency
+C0024473,magnesium deficiency
+C0032827,potassium deficiency
+C0042842,vitamin - a deficiency
+C0007570,gluten - sensitive enteropathy
+C0949570,"allergy, wheat"
+C0221036,acrodermatitis enteropathica
+C0017155,menetrian disease
+C0023530,leukocytopenia
+C0221406,cushing disease
+C0020461,hypercalemia
+C0010068,coronary heart disease
+C0029456,osteoporosis
+C1258215,ileus
+C0023890,cirrhosis of the liver
+C0018378,guillain barre syndrome
+C0019937,horner syndrome
+C0338481,eye migraines
+C0010346,crohn's disease
+C0026764,plasma cell myeloma
+C1527249,colorectal cancer
+C0026896,myasthenia gravis
+C0003873,"arthritis, rheumatoid"
+C0002871,anemia
+C0039070,syncope
+C0026769,multiple sclerosis
+C0020621,hypocalemia
+C1306557,chronic venous insufficiency
+C0008350,cholelithiasis
+C0020550,hyperthyroidism
+C0025289,meningitis
+C0022661,chronic kidney failure
+C0027726,nephrotic syndrome
+C0041948,uraemia
+C0020676,hypothyroidism
+C0235295,Acute abdomen
+C0020542,pulmonary hypertension
+C3495801,granulomatosis with polyangiitis
+C0020615,hypoglycemia
+C0011570,depression
+C0003962,ascites
+C0031511,phaeochromocytoma
+C0022346,icterus
+C0017658,glomerulonephritis
+C0020649,hypotension
+C0340643,aortic dissection
+C0040425,tonsillitis
+C0036262,scabies
+C0854330,herpes zoster dermatitis
+C1704272,benign prostatic hyperplasia
+C0235974,pancreatic cancer
+C0011848,diabetes insipidus
+C0020437,hypercalcaemia
+C0021345,Pfeiffer fever
+C0162316,iron deficiency anemia
+C0852445,hodgkin's disease
+C0035012,Reiter's disease
+C0036974,shock
+C0010674,cystic fibrosis
+C0014118,endocarditis
+C0034734,Raynaud
+C0036341,schizophrenia
+C0038525,subarachnoid hemorrhage
+C0019187,"hepatitis, alcoholic"
+C0032461,polycythemia
+C0004943,behcet's disease
+C0011206,delirium
+C0020651,orthostatic syndrome
+C0011633,dermatomyositis
+C0002895,sickle cell anemia
+C0018995,haemochromatosis
+C0019151,"encephalopathy, hepatic"
+C0002726,amyloidosis
+C0035222,acute respiratory distress syndrome
+C1144799,hypertensive cardiomyopathy
+C0011175,desiccosis
+C1384514,primary hyperaldosteronism
+C0034072,cor pulmonale
+C0017168,gastroesophageal reflux disease
+C0033860,psoriasis
+C1145670,respiratory failure
+C0549346,ischialgia
+C0043121,wernicke - encephalopathy
+C0019202,wilson's disease
+C0012813,diverticulitis
+C0025281,meniere's disease
+C0024305,non-hodgkin lymphoma
+C0086543,cataract
+C0014038,encephalitis
+C0024530,malaria
+C0034186,pyelonephritis
+C0032026,pityriasis rosea
+C0017551,gilbert syndrome
+C0600139,prostate cancer
+C0013080,down syndrom
+C0019158,hepatitis
+C0001824,agranulocytosis
+C0155502,benign paroxysmal positional vertigo
+C0023434,chronic lymphocytic leukemia
+C0003504,aortic regurgitation
+C0149931,migraine
+C0007787,Transient ischemic attack
+C0023473,chronic myeloid leukemia
+C0006267,bronchiectasis
+C0024141,systemic lupus erythematosus
+C0040127,thyrotoxic crisis
+C1527311,cerebral edema
+C0019112,hemorrhoids
+C0038358,gastric ulcer
+C0221757,alpha - 1 proteinase inhibitor deficiency
+C0010481,cushing syndrome
+C0029925,ovarian cancer
+C0002874,aplastic anemia
+C0018081,gonorrhea
+C0039232,av node - reentry - tachycardia
+C0008049,varicella
+C0006285,bronchopneumonia
+C0221069,anterior spinal artery syndrome
+C0022972,lambert - eaton syndrome
+C0016053,fibromyalgia
+C0007398,catatonia
+C0021141,Schwartz - Bartter Syndrome
+C0042974,von - willebrand - disease
+C0023176,lead poisoning
+C0302592,cervical cancer
+C1306571,liver failure
+C0012546,diphtheria
+C0001206,acromegaly
+C0085278,antiphospholipid syndrome
+C0020428,hyperaldosteronism
+C0003864,arthritis
+C0007115,thyroid cancer
+C0151945,cerebral venous thrombosis
+C0542142,paralysis of the recurrent laryngeal nerve
+C0007134,kidney cell carcinoma
+C0451641,urolithiasis
+C0021400,influenza
+C0520764,clostridia - gastroenteritis
+C0035400,reye syndrome
+C0032708,porphyria
+C0376175,facial palsy
+C0026691,kawasaki syndrome
+C0011881,diabetic nephropathy
+C0036285,Scarlet fever
+C0017152,gastritis
+C0264558,tension pneumothorax
+C0008373,cholesteatoma
+C0031046,pericarditis
+C0020258,"hydrocephalus, normal pressure"
+C0152018,esophageal carcinoma
+C2239176,hepatocellular carcinoma
+C0040028,essential thrombocythaemia
+C0751761,upper respiratory tract sleep apnea syndrome
+C0008677,Chronic bronchitis
+C0153633,brain tumor malignant
+C0038531,subclavian - steal syndrome
+C0027059,myocarditis
+C0021807,intertrigo
+C0008311,cholangitis
+C0566602,primary sclerosing cholangitis
+C0024586,carcinoid syndrome
+C0852437,myeloproliferative diseases (excluding leukaemias)
+C0149518,acute gastritis
+C0035579,rickets
+C3888977,uterine myomatosis
+C0023467,acute myeloid leukemia
+C0029882,otitis media
+C0006107,commotio cerebri
+C0014869,reflux esophagitis
+C0010692,cystitis
+C1510475,diverticulosis
+C0011119,diving disease
+C0752347,lewy - body - dementia
+C0149801,urosepsis
+C0043019,Wallenberg Syndrome
+C0558355,Tonsil cancer
+C0206702,klatskin tumor
+C0024225,lymphangitis
+C0030920,"ulcer, gastroduodenal"
+C0017601,glaucoma
+C3495928,thyroid-related orbitopathy
+C0949690,spondylarthritis
+C0003492,coarctation of the aorta
+C0152032,urinary retention
+C0027849,Neuroleptic Malignant Syndrome
+C0030353,congestive papilla
+C0392549,infantile cerebral palsy
+C0035305,retinal reading
+C0041976,urethritis
+C0019069,haemophilia a
+C0017205,gaucher disease
+C1704436,peripheral arterial disease
+C0035410,rhabdomyolysis
+C0035920,rubella
+C0023449,acute lymphoblastic leukemia
+C0014752,erythrasma
+C0028734,nycturia
+C0948968,Osteomyelofibrosis
+C0002390,"allergic alveolitis, exogenous"
+C0003550,broca - aphasia
+C0024904,mastoiditis
+C0039621,tetanie
+C0259756,herxheimer - reaction
+C1258104,"sclerosis, progressive systemic"
+C0030436,parakeratosis
+C0087031,"Still disease, juvenile form"
+C0175702,williams - beuren - syndrome
+C0340164,loefgren syndrome
+C0020305,hydrops fetalis
+C0007194,obstructive cardiomyopathy
+C0553720,sphaerocytosis
+C0017920,glucose phosphatase deficiency 06
+C0002895,sickle cell disease
+C0002874,anemia aplastic
+C0023443,hair cell leukemia
+C0036920,sezary syndrome
+C0085669,acute leukemia
+C0002986,Fabry Syndrome
+C0398650,immune thrombocytopenic purpura
+C0014121,infectious endocarditis
+C0035436,rheumatic fever
+C0026269,mitral valve stenosis
+C0026266,mitral regurgitation
+C0026267,mitral valve prolapse
+C0003507,aortic stenosis
+C0003504,aortic regurgitation
+C1956257,pulmonary stenosis
+C0018817,atrial septal defect
+C0018818,ventricular septal defect
+C0013481,ebstein - anomaly
+C0039685,fallot tetralogy
+C0024796,marfan's syndrome
+C0151595,digitalis intoxication
+C0041234,chagas - disease
+C0007177,heart bag tamponade
+C0265144,chronic constrictive pericarditis
+C0027051,Heart attack
+C0024117,chronic obstructive pulmonary disease
+C0032269,pneumococcal infections
+C0026936,"mycoplasma infection, unspecified"
+C1096584,chlamydia pneumoniae - infection
+C0029291,ornithosis
+C0034362,q - fever
+C0003175,infection with bacillus anthracis
+C0035235,respiratory syncytial virus infections
+C0085740,mendelson's syndrome
+C0037116,silicosis
+C0007121,bronchial carcinoma
+C0036202,sarcoid
+C1321756,achalasia
+C0014854,esophageal diverticulum
+C0024623,gastric cancer
+C0016470,food allergy
+C0302858,protein loss syndrome
+C0009324,ulcerative colitis
+C0400821,microscopic colitis
+C0022104,irritable bowel
+C0001339,acute pancreatitis
+C0149521,chronic pancreatitis
+C0206695,"carcinoma, neuroendocrine"
+C0021670,insulinoma
+C0086768,verner morrison syndrome
+C0019189,"hepatitis, chronic"
+C0023896,alcoholic liver disease
+C0162557,"liver failure, acute"
+C3805004,post-infectious glomerulonephritis
+C0451728,rapid - progressive nephritic syndrome
+C3805154,renal osteopathy syndrome
+C0027708,nephroblastoma
