@@ -9,12 +9,11 @@ from nltk.tokenize import word_tokenize
 from itertools import chain
 from nltk.corpus import wordnet
 from sklearn.neighbors import KNeighborsClassifier
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,session
 
 app = Flask(__name__)
-
 nlp = spacy.load('en_core_web_sm')
-
+j=0
 #read pd
 df_tr=pd.read_csv('Training.csv')
 
@@ -243,14 +242,15 @@ def getInfo():
     return str(name)
 
 def related_sym(psym1):
-    print("searches related to input: ")
+    s="searches related to input: <br>"
+    i=len(s)
     for num,it in enumerate(psym1):
-        print(num,")",clean_symp(it))
+        s+=str(num)+") "+clean_symp(it)+"<br>"
     if num!=0:
-        print(f"Select the one you meant (0 - {num}):  ", end="")
-        conf_inp = int(input(""))
+        s+="Select the one you meant."
+        return s
     else:
-        conf_inp=0
+        return 0
 
     disease_input=psym1[conf_inp]
     return disease_input
@@ -339,7 +339,7 @@ def main_sp(name,all_symp_col):
                         continue
     return knn_clf.predict(OHV(all_sym,all_symp_col)),all_sym
 
-
+"""
 def chat_sp():
     a=True
     while a:
@@ -366,7 +366,7 @@ def chat_sp():
             ans=input()
             if ans!="yes":
                 a=False
-                print("§ Thanks for using ower application § ")
+                print("§ Thanks for using ower application § ")"""
 
 @app.route("/")
 def home():
@@ -374,10 +374,268 @@ def home():
 
 @app.route("/get")
 def get_bot_response():
-	userText = request.args.get('msg')
-	return str('hi')
+    s = request.args.get('msg')
+    if "step" in session:
+        if session["step"]=="Q_C":
+            name=session["name"]
+            session.clear()
+            if s=="q":
+                "Thank you for using ower web site Mr/Ms "+name
+            else:
+                session["step"]="FS"
+                session["name"]=name    
+    if 'name' not in session and 'step' not in session:
+        session['name']=s
+        session['step']="Depart"
+    if session['step']=="Depart":
+        session['step']="FS" #first symptom
+        return "HeLLO Mr/Ms "+session["name"]+" enter the main symptom you are experiencing "
+    if session['step']=="FS":
+        sym1 = s
+        sym1=preprocess_sym(sym1)
+        sim1,psym1=check_pattern(sym1,all_symp_pr) 
+        temp=[]
+        temp.append(sym1)
+        temp.append(sim1)
+        temp.append(psym1)
+        session['FSY']=temp #info du 1er symptome
+        session['step']="SS" #second symptomee     
+        if sim1==1:
+            session['step']="RS1" #related_sym1
+            s=related_sym(psym1)
+            if s!=0:
+                return s
+        else:
+            return "Enter a second symptom you are experiencing Mr/Ms "+session["name"]
+    if session['step']=="RS1":
+        temp=session['FSY']
+        psym1=temp[2]
+        psym1=psym1[int(s)]
+        temp[2]=psym1
+        session['FSY']=temp
+        session['step']='SS'
+        return "Enter a second symptom you are experiencing Mr/Ms "+session["name"]
+    if session['step']=="SS":
+        sym2 = s
+        sym2=preprocess_sym(sym2)
+        sim2,psym2=check_pattern(sym2,all_symp_pr) 
+        temp=[]
+        temp.append(sym2)
+        temp.append(sim2)
+        temp.append(psym2)
+        session['SSY']=temp #info du 2eME symptome(sym,sim,psym)
+        session['step']="semantic" #face semantic
+        if sim2==1:
+            session['step']="RS2" #related sym2            
+            s=related_sym(psym2)
+            if s!=0:
+                return s
+    if session['step']=="RS2":
+        temp=session['SSY']
+        psym2=temp[2]
+        psym2=psym2[int(s)]
+        temp[2]=psym2
+        session['SSY']=temp
+        session['step']="semantic"
+    if session['step']=="semantic":
+        temp=session["FSY"] #recuperer info du premier
+        sym1=temp[0]
+        sim1=temp[1]
+        temp=session["SSY"] #recuperer info du 2 eme symptome
+        sym2=temp[0]
+        sim2=temp[1]
+        if sim1==0 or sim2==0:
+            sim1,psym1=semantic_similarity(sym1,all_symp_pr)
+            sim2,psym2=semantic_similarity(sym2,all_symp_pr)
+            temp=[]
+            temp.append(sym2)
+            temp.append(sim2)
+            temp.append(psym2)
+            session['SSY']=temp
+            temp=[]
+            temp.append(sym1)
+            temp.append(sim1)
+            temp.append(psym1)
+            session['FSY']=temp
+            session['step']="sim1=0"
+        else:
+            print("hey1")
+            session['step']='PD' #to possible_diseases
+    if session['step']=="sim1=0": #test syntaxic
+        print("innnn")
+        temp=session["FSY"]
+        sym1=temp[0]
+        sim1=temp[1]
+        if sim1==0:
+            if "suggested" in session :
+                sugg=session["suggested"]
+                if s=="yes":
+                    psym1=sugg[0]
+                    sim1=1
+                    temp=session["FSY"]
+                    temp[1]=sim1
+                    temp[2]=psym1
+                    session["FSY"]=temp
+                    sugg=[]
+                else:
+                    del sugg[0]
+            if "suggested" not in session:
+                session["suggested"]=suggest_syn(sym1)
+                sugg=session["suggested"]
+            if len(sugg)>0:
+                msg="Do you feel "+sugg[0]+"?"
+                return msg
+        del session["suggested"]
+        session['step']="sim2=0"
+    if session['step']=="sim2=0":
+        temp=session["SSY"]
+        sym2=temp[0]
+        sim2=temp[1]        
+        if sim2==0:
+            if "suggested_2" in session :
+                sugg=session["suggested_2"]
+                if s=="yes":
+                    psym2=sugg[0]
+                    sim2=1
+                    temp=session["SSY"]
+                    temp[1]=sim2
+                    temp[2]=psym2
+                    session["SSY"]=temp
+                    sugg=[]
+                else:
+                    del sugg[0]
+            if "suggested_2" not in session:
+                session["suggested_2"]=suggest_syn(sym2)
+                sugg=session["suggested_2"]
+            if len(sugg)>0:
+                msg="Do you feel "+sugg[0]+"?"
+                session["suggested_2"]=sugg
+                return msg
+        del session["suggested_2"]
+        session['step']="TEST" #test if semantic and syntaxic not found
+    if session['step']=="TEST":
+        temp=session["FSY"]
+        sim1=temp[1]
+        psym1=temp[2]
+        temp=session["SSY"]
+        sim2=temp[1]
+        psym2=temp[2]
+        if sim1==0 and sim2==0:
+            #GO TO THE END
+            result=None
+            session['step']="END"
+        else :
+            if sim1==0:
+                psym1=psym2
+                temp=session["FSY"]
+                temp[2]=psym2
+                session["FSY"]=temp
+            if sim2==0:
+                psym2=psym1
+                temp=session["SSY"]
+                temp[2]=psym1
+                session["SSY"]=temp
+            session['step']='PD' #to possible_diseases
+    if session['step']=='PD': 
+        #MAYBE THE LAST STEP
+        #create patient symp list
+        temp=session["FSY"]
+        sim1=temp[1]
+        psym1=temp[2]
+        temp=session["SSY"]
+        sim2=temp[1]
+        psym2=temp[2]
+        print("hey2")
+        if "all" not in session:
+            print("inside")
+            session["all"]=[col_dict[psym1],col_dict[psym2]]
+            print(session["all"])
+        session["diseases"]=possible_diseases(session["all"])
+        print("hey3")
+        print(session["diseases"])
+        all_sym=session["all"]
+        if len(session["diseases"])<=1:
+            session['step']="PREDICT"
+        else:
+            diseases=session["diseases"]
+            dis=diseases[0]
+            session["dis"]=dis
+            session['step']="for_dis"
+    if session['step']=="DIS":
+        if "symv" in session:
+            if len(s)>0:
+                symts=session["symv"]
+                all_sym=session["all"]
+                if s=="yes":
+                    all_sym.append(symts[0])
+                    session["all"]=all_sym
+                del symts[0]
+                session["symv"]=symts
+        if "symv" not in session :
+            session["symv"]=symVONdisease(df_tr, session["dis"])
+        if len(session["symv"])>0:
+            symts=session["symv"]
+            msg="do you feel "+symts[0]+"?"
+            return msg
+        else:
+            diseases=session["diseases"]
+            del diseases[0]
+            session["diseases"]=diseases
+            session['step']="for_dis"
+    if session['step']=="for_dis":
+        diseases=session["diseases"]
+        if len(diseases)<0 or len(possible_diseases(session["all"]))<=1:
+            session['step']='PREDICT'
+        else:
+            session["dis"]=diseases[0]
+            session['step']="DIS"
+            return get_bot_response() #turn around sympt of dis    
+        #predict possible diseases 
+    if session['step']=="PREDICT":
+        result=knn_clf.predict(OHV(session["all"],all_symp_col))
+        session['step']="END"
+    if session['step']=="END":
+        if result!=None:
+            session['step']="Description"
+            session["disease"]=result[0]
+            return "You may have "+result[0]+" type any key to get a description of the disease ."
+        else:
+            session['step']="Q_C" #test if user want to continue the conversation or not
+            return "can you specify more what you feel or type q to stop the conversation"
+    if session['step']=="Description":
+        session['step']="Severity"
+        return description_list[session["disease"]]+" \n <br> how many day do you feel those symptoms ?"
+    if session['step']=="Severity":
+        session['step']='FINAL'
+        if calc_condition(session["all"],int(s))==1:
+            return "you should take the consultation from doctor <br> (type q to end)"
+        else:
+            msg='Take following precautions :<br> ' 
+            i=1
+            for e in precautionDictionary[session["disease"]]:
+                msg+='\n '+str(i)+'->'+e+'<br>'
+            msg+=' (Type q to end)'
+            return msg
+    if session['step']=="FINAL":
+        session['step']="BYE"
+        return "do you need another medical consultation (yes or no)? "
+    if session['step']=="BYE":
+        name=session["name"]
+        session.clear()
+        if s =="yes":
+            session["name"]=name
+            session['step']="FS"
+            return "HeLLO again Mr/Ms "+session["name"]+" enter the main symptom you are experiencing "
+        else:
+            return "THANKS Mr/Ms "+name+" for using ower app for more information pleas contact .."
 
 
 if __name__ == "__main__":
+    import random # define the random module 
+    import string  
+    S = 10  # number of characters in the string.  
+    # call random.choices() string module to find the string in Uppercase + numeric data.  
+    ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k = S))    
     #chat_sp()
+    app.secret_key = str(ran)   
     app.run()
