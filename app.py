@@ -219,7 +219,8 @@ def getprecautionDict():
 def calc_condition(exp,days):
     sum=0
     for item in exp:
-         sum=sum+severityDictionary[item]
+        if item in severityDictionary:
+            sum=sum+severityDictionary[item]
     if((sum*days)/(len(exp))>13):
         print("You should take the consultation from doctor. ")
         return 1
@@ -574,9 +575,14 @@ def get_bot_response():
         if "symv" not in session :
             session["symv"]=symVONdisease(df_tr, session["dis"])
         if len(session["symv"])>0:
-            symts=session["symv"]
-            msg="do you feel "+symts[0]+"?"
-            return msg
+            if symts[0] not in session["all"]:
+                symts=session["symv"]
+                msg="do you feel "+clean_symp(symts[0])+"?"
+                return msg
+            else :
+                del symts[0]
+                session["symv"]=symts
+                return get_bot_response()
         else:
             diseases=session["diseases"]
             del diseases[0]
@@ -589,6 +595,7 @@ def get_bot_response():
         else:
             session["dis"]=diseases[0]
             session['step']="DIS"
+            session["symv"]=symVONdisease(df_tr, session["dis"])
             return get_bot_response() #turn around sympt of dis    
         #predict possible diseases 
     if session['step']=="PREDICT":
