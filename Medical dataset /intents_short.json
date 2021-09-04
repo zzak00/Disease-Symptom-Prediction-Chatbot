@@ -9,6 +9,14 @@
                 "pain in abdomen"
             ]
         },
+	{
+
+		"tag":"anxiety",
+		"patterns": [
+		"suffer from anxeity"
+		 ]
+
+	},
         {
             "tag": "abnormal_menstruation",
             "patterns": [
