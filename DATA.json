@@ -31,6 +31,27 @@
                 "skin_rash",
                 "dischromic _patches"
             ]
+        },
+        {
+            "Name": "lion",
+            "Age": 21,
+            "Gender": "M",
+            "Disease": "Fungal infection",
+            "Sympts": [
+                "itching",
+                "skin_rash",
+                "dischromic _patches"
+            ]
+        },
+        {
+            "Name": "lion",
+            "Age": 21,
+            "Gender": "Male",
+            "Disease": "Fungal infection",
+            "Sympts": [
+                "itching",
+                "dischromic _patches"
+            ]
         }
     ]
 }

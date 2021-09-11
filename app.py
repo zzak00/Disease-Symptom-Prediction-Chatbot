@@ -231,13 +231,6 @@ getprecautionDict()
 getDescription()
 
 
-# Chat 
-def getInfo():
-    # name=input("Name:")
-    print("Your Name \n\t\t\t\t\t\t",end="=>")
-    name=input("")
-    print("hello ",name)
-    return str(name)
 
 def related_sym(psym1):
     s="searches related to input: <br>"
@@ -250,121 +243,7 @@ def related_sym(psym1):
     else:
         return 0
 
-    disease_input=psym1[conf_inp]
-    return disease_input
 
-def main_sp(name,all_symp_col):
-    #main Idea: At least two initial sympts to start with
-    
-    #get the 1st syp ->> process it ->> check_pattern ->>> get the appropriate one (if check_pattern==1 == similar syntaxic symp found)
-    print("Enter the main symptom you are experiencing Mr/Ms "+name+"  \n\t\t\t\t\t\t",end="=>")
-    sym1 = input("")
-    sym1=preprocess_sym(sym1)
-    sim1,psym1=check_pattern(sym1,all_symp_pr)
-    if sim1==1 :
-        psym1=related_sym(psym1)
-    
-    #get the 2nd syp ->> process it ->> check_pattern ->>> get the appropriate one (if check_pattern==1 == similar syntaxic symp found)
-
-    print("Enter a second symptom you are experiencing Mr/Ms "+name+"  \n\t\t\t\t\t\t",end="=>")
-    sym2=input("")
-    sym2=preprocess_sym(sym2)
-    sim2,psym2=check_pattern(sym2,all_symp_pr)
-    if sim2==1 :
-        psym2=related_sym(psym2)
-        
-    #if check_pattern==0 no similar syntaxic symp1 or symp2 ->> try semantic similarity
-    
-    if sim1==0 or sim2==0:
-        sim1,psym1=semantic_similarity(sym1,all_symp_pr)
-        sim2,psym2=semantic_similarity(sym2,all_symp_pr)
-        
-        #if semantic sim syp1 ==0 (no symp found) ->> suggest possible data symptoms based on all data and input sym synonymes
-        if sim1==0:
-            sugg=suggest_syn(sym1)
-            print('Are you experiencing any ')
-            for res in sugg:
-                print(res)
-                inp=input('')
-                if inp=="yes":
-                    psym1=res
-                    sim1=1
-                    break
-                
-        #if semantic sim syp2 ==0 (no symp found) ->> suggest possible data symptoms based on all data and input sym synonymes
-        if sim2==0:
-            sugg=suggest_syn(sym2)
-            for res in sugg:
-                inp=input('Do you feel '+ res+" ?(yes or no) ")
-                if inp=="yes":
-                    psym2=res
-                    sim2=1
-                    break
-        #if no syntaxic semantic and suggested sym found return None and ask for clarification
-
-        if sim1==0 and sim2==0:
-            return None,None
-        else:
-            # if at least one sym found ->> duplicate it and proceed
-            if sim1==0:
-                psym1=psym2
-            if sim2==0:
-                psym2=psym1
-    #create patient symp list
-    all_sym=[col_dict[psym1],col_dict[psym2]]
-    #predict possible diseases
-    diseases=possible_diseases(all_sym)
-    stop=False
-    print("Are you experiencing any ")
-    for dis in diseases:
-        if stop==False:
-            for sym in symVONdisease(df_tr,dis):
-                if sym not in all_sym:
-                    print(clean_symp(sym)+' ?')
-                    while True:
-                        inp=input("")
-                        if(inp=="yes" or inp=="no"):
-                            break
-                        else:
-                            print("provide proper answers i.e. (yes/no) : ",end="")
-                    if inp=="yes":
-                        all_sym.append(sym)
-                        dise=possible_diseases(all_sym)
-                        if len(dise)==1:
-                            stop=True 
-                            break
-                    else:
-                        continue
-    return knn_clf.predict(OHV(all_sym,all_symp_col)),all_sym
-
-"""
-def chat_sp():
-    a=True
-    while a:
-        name=getInfo()
-        result,sym=main_sp(name,all_symp_col)
-        if result == None :
-            ans3=input("can you specify more what you feel or tap q to stop the conversation")
-            if ans3=="q":
-                a=False
-            else:
-                continue
-
-        else:
-            print("you may have "+result[0])
-            print(description_list[result[0]])
-            an=input("how many day do you feel those symptoms ?")
-            if calc_condition(sym,int(an))==1:
-                print("you should take the consultation from doctor")
-            else : 
-                print('Take following precautions : ')
-                for e in precautionDictionary[result[0]]:
-                    print(e)
-            print("do you need another medical consultation (yes or no)? ")
-            ans=input()
-            if ans!="yes":
-                a=False
-                print("§ Thanks for using ower application § ")"""
 import json
 def write_json(new_data, filename='DATA.json'):
     with open(filename,'r+') as file:
@@ -390,6 +269,8 @@ def get_bot_response():
             age=session["age"]
             gender=session["gender"]
             session.clear()
+            if s=="ok":
+                return "What is you name ?"
             if s=="q":
                 "Thank you for using ower web site Mr/Ms "+name
             else:
@@ -400,17 +281,17 @@ def get_bot_response():
     if 'name' not in session and 'step' not in session:
         session['name']=s
         session['step']="age"
-        return "please give us your age "
+        return "How old are you? "
     if session["step"]=="age":
         session["age"]=int(s)
         session["step"]="gender"
-        return "please give us your gender"
+        return "Can you specify your gender"
     if session["step"]=="gender":
         session["gender"]=s
         session["step"]="Depart"
     if session['step']=="Depart":
         session['step']="FS" #first symptom
-        return "HeLLO Mr/Ms "+session["name"]+" enter the main symptom you are experiencing "
+        return "HeLLO Mr/Ms "+session["name"]+", you need to provide me your main symptom, then I'll ask a few questions to see what you should do. "    
     if session['step']=="FS":
         sym1 = s
         sym1=preprocess_sym(sym1)
@@ -427,7 +308,7 @@ def get_bot_response():
             if s!=0:
                 return s
         else:
-            return "Enter a second symptom you are experiencing Mr/Ms "+session["name"]
+            return "Could you be more specific about the symptom you are suffering from ?" 
     if session['step']=="RS1":
         temp=session['FSY']
         psym1=temp[2]
@@ -435,7 +316,7 @@ def get_bot_response():
         temp[2]=psym1
         session['FSY']=temp
         session['step']='SS'
-        return "Enter a second symptom you are experiencing Mr/Ms "+session["name"]
+        return "You are probably facing another symptom, can you specify it?"
     if session['step']=="SS":
         sym2 = s
         sym2=preprocess_sym(sym2)
@@ -627,7 +508,7 @@ def get_bot_response():
         if result!=None:
             session['step']="Description"
             session["disease"]=result[0]
-            return "You may have "+result[0]+" type any key to get a description of the disease ."
+            return "Well Mr/Ms "+session["name"]+", you may have "+result[0]+" type D to get a description of the disease ."
         else:
             session['step']="Q_C" #test if user want to continue the conversation or not
             return "can you specify more what you feel or type q to stop the conversation"
@@ -650,6 +531,7 @@ def get_bot_response():
             i=1
             for e in precautionDictionary[session["disease"]]:
                 msg+='\n '+str(i)+'->'+e+'<br>'
+                i+=1
             msg+=' (Type q to end)'
             return msg
     if session['step']=="FINAL":
@@ -661,9 +543,9 @@ def get_bot_response():
         if s =="yes":
             session["name"]=name
             session['step']="FS"
-            return "HeLLO again Mr/Ms "+session["name"]+" enter the main symptom you are experiencing "
+            return "HELLO again Mr/Ms "+session["name"]+" enter the main symptom you are experiencing "
         else:
-            return "THANKS Mr/Ms "+name+" for using ower app for more information pleas contact <b> +21266666666</b>"
+            return "THANKS Mr/Ms "+name+" for using ower app for more information please contact <b> +21266666666</b>"
 
 
 if __name__ == "__main__":
@@ -674,4 +556,4 @@ if __name__ == "__main__":
     ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k = S))    
     #chat_sp()
     app.secret_key = str(ran)   
-    app.run()
+    app.run(debug=True)
