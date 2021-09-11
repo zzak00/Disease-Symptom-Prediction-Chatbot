@@ -1,0 +1,15 @@
+{
+    "users": [
+        {
+            "Name": "ismail",
+            "Age": 18,
+            "Gender": "male",
+            "Disease": "Fungal infection",
+            "Sympts": [
+                "itching",
+                "skin_rash",
+                "dischromic _patches"
+            ]
+        }
+    ]
+}
