@@ -15,8 +15,8 @@ app = Flask(__name__)
 nlp = spacy.load('en_core_web_sm')
 j=0
 #read pd
-df_tr=pd.read_csv('NEWTRAIN.csv')
-df_tt=pd.read_csv('NEWTEST.csv')
+df_tr=pd.read_csv('Medical_dataset/NEWTRAIN.csv')
+df_tt=pd.read_csv('Medical_dataset/NEWTEST.csv')
 symp=[]
 disease=[]
 for i in range(len(df_tr)):
