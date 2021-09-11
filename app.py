@@ -543,7 +543,7 @@ def get_bot_response():
         if s =="yes":
             session["name"]=name
             session['step']="FS"
-            return "HELLO again Mr/Ms "+session["name"]+" enter the main symptom you are experiencing "
+            return "HELLO again Mr/Ms "+session["name"]+" Please tell me your main symptom. "
         else:
             return "THANKS Mr/Ms "+name+" for using ower app for more information please contact <b> +21266666666</b>"
 

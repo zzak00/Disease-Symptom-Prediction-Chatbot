@@ -52,6 +52,17 @@
                 "itching",
                 "dischromic _patches"
             ]
+        },
+        {
+            "Name": "ok",
+            "Age": 12,
+            "Gender": "m",
+            "Disease": "Fungal infection",
+            "Sympts": [
+                "itching",
+                "skin_rash",
+                "dischromic _patches"
+            ]
         }
     ]
 }
