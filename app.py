@@ -8,7 +8,7 @@ from nltk.wsd import lesk
 from nltk.tokenize import word_tokenize
 from itertools import chain
 from nltk.corpus import wordnet
-from sklearn.neighbors import KNeighborsClassifier
+import joblib
 from flask import Flask, render_template, request,session
 
 app = Flask(__name__)
@@ -168,13 +168,10 @@ def possible_diseases(l):
             poss_dis.append(dis)
     return poss_dis
 
+import joblib
 
 # Prediction Model 
-X_train=df_tr.iloc[:,:-1]
-y_train = df_tr.iloc[:,-1] 
-knn_clf=KNeighborsClassifier()
-knn_clf.fit(X_train,y_train)
-
+knn_clf=joblib.load('knn_full.pkl')  
 ## SEVERITY / DESCRIPTION / PRECAUTION
 severityDictionary=dict()
 description_list = dict()

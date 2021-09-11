@@ -20,6 +20,17 @@
                 "headache",
                 "nausea and vomiting"
             ]
+        },
+        {
+            "Name": "zzak00",
+            "Age": 22,
+            "Gender": "M",
+            "Disease": "Fungal infection",
+            "Sympts": [
+                "itching",
+                "skin_rash",
+                "dischromic _patches"
+            ]
         }
     ]
 }
