@@ -269,8 +269,6 @@ def get_bot_response():
             age=session["age"]
             gender=session["gender"]
             session.clear()
-            if s=="ok":
-                return "What is you name ?"
             if s=="q":
                 "Thank you for using ower web site Mr/Ms "+name
             else:
@@ -278,6 +276,8 @@ def get_bot_response():
                 session["name"]=name  
                 session["age"]=age
                 session["gender"]=gender  
+    if s=="ok":
+        return "What is your name ?"
     if 'name' not in session and 'step' not in session:
         session['name']=s
         session['step']="age"
@@ -285,13 +285,16 @@ def get_bot_response():
     if session["step"]=="age":
         session["age"]=int(s)
         session["step"]="gender"
-        return "Can you specify your gender"
+        return "Can you specify your gender ?"
     if session["step"]=="gender":
         session["gender"]=s
         session["step"]="Depart"
     if session['step']=="Depart":
-        session['step']="FS" #first symptom
-        return "HeLLO Mr/Ms "+session["name"]+", you need to provide me your main symptom, then I'll ask a few questions to see what you should do. "    
+        session['step']="BFS" 
+        return "Hello Mr/Ms "+session["name"]+", I will ask a few questions about your symptoms to see what you should do. Tap S to start diagnostic"    
+    if session['step']=="BFS":
+        session['step']="FS"  # first symp
+        return "Please tell me your main symptom ?"
     if session['step']=="FS":
         sym1 = s
         sym1=preprocess_sym(sym1)

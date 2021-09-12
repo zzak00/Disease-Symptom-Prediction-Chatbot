@@ -63,6 +63,17 @@
                 "skin_rash",
                 "dischromic _patches"
             ]
+        },
+        {
+            "Name": "zzak",
+            "Age": 21,
+            "Gender": "M",
+            "Disease": "Fungal infection",
+            "Sympts": [
+                "itching",
+                "skin_rash",
+                "dischromic _patches"
+            ]
         }
     ]
 }
