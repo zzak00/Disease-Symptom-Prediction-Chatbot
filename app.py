@@ -179,7 +179,7 @@ precautionDictionary=dict()
 
 def getDescription():
     global description_list
-    with open('symptom_Description.csv') as csv_file:
+    with open('Medical_dataset/symptom_Description.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
         for row in csv_reader:
@@ -191,7 +191,7 @@ def getDescription():
 
 def getSeverityDict():
     global severityDictionary
-    with open('symptom_severity.csv') as csv_file:
+    with open('Medical_dataset/symptom_severity.csv') as csv_file:
 
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
@@ -205,7 +205,7 @@ def getSeverityDict():
 
 def getprecautionDict():
     global precautionDictionary
-    with open('symptom_precaution.csv') as csv_file:
+    with open('Medical_dataset/symptom_precaution.csv') as csv_file:
 
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
@@ -276,7 +276,7 @@ def get_bot_response():
                 session["name"]=name  
                 session["age"]=age
                 session["gender"]=gender  
-    if s=="ok":
+    if s.upper()=="OK":
         return "What is your name ?"
     if 'name' not in session and 'step' not in session:
         session['name']=s
@@ -298,7 +298,7 @@ def get_bot_response():
     if session['step']=="FS":
         sym1 = s
         sym1=preprocess_sym(sym1)
-        sim1,psym1=check_pattern(sym1,all_symp_pr) 
+        sim1,psym1=check_pattern(sym1,all_symp_pr)
         temp=[]
         temp.append(sym1)
         temp.append(sim1)
@@ -323,7 +323,10 @@ def get_bot_response():
     if session['step']=="SS":
         sym2 = s
         sym2=preprocess_sym(sym2)
-        sim2,psym2=check_pattern(sym2,all_symp_pr) 
+        sim2=0
+        psym2=[]
+        if len(sym2)!=0:
+            sim2,psym2=check_pattern(sym2,all_symp_pr) 
         temp=[]
         temp.append(sym2)
         temp.append(sim2)
@@ -350,23 +353,22 @@ def get_bot_response():
         sym2=temp[0]
         sim2=temp[1]
         if sim1==0 or sim2==0:
+            session['step']="BFsim1=0"
+        else:
+            print("hey1")
+            session['step']='PD' #to possible_diseases
+    if session['step']=="BFsim1=0":
+        if sim1==0 and len(sym1)!=0:
             sim1,psym1=semantic_similarity(sym1,all_symp_pr)
-            sim2,psym2=semantic_similarity(sym2,all_symp_pr)
-            temp=[]
-            temp.append(sym2)
-            temp.append(sim2)
-            temp.append(psym2)
-            session['SSY']=temp
             temp=[]
             temp.append(sym1)
             temp.append(sim1)
             temp.append(psym1)
             session['FSY']=temp
-            session['step']="sim1=0"
+            session['step']="sim1=0" #process of semantic similarity=1 for first sympt.
         else:
-            print("hey1")
-            session['step']='PD' #to possible_diseases
-    if session['step']=="sim1=0": #test syntaxic
+            session['step']="BFsim2=0"
+    if session['step']=="sim1=0": #semantic no => suggestion
         print("innnn")
         temp=session["FSY"]
         sym1=temp[0]
@@ -392,7 +394,21 @@ def get_bot_response():
                 return msg
         if "suggested" in session:
             del session["suggested"]
-        session['step']="sim2=0"
+        session['step']="BFsim2=0"
+    if session['step']=="BFsim2=0":
+        temp=session["SSY"] #recuperer info du 2 eme symptome
+        sym2=temp[0]
+        sim2=temp[1]
+        if sim2==0 and len(sym2)!=0:
+            sim2,psym2=semantic_similarity(sym2,all_symp_pr)
+            temp=[]
+            temp.append(sym2)
+            temp.append(sim2)
+            temp.append(psym2)
+            session['SSY']=temp
+            session['step']="sim2=0" 
+        else:
+            session['step']="TEST"  
     if session['step']=="sim2=0":
         temp=session["SSY"]
         sym2=temp[0]
@@ -419,7 +435,7 @@ def get_bot_response():
                 return msg
         if "suggested_2" in session:
             del session["suggested_2"]
-        session['step']="TEST" #test if semantic and syntaxic not found
+        session['step']="TEST" #test if semantic and syntaxic and suggestion not found
     if session['step']=="TEST":
         temp=session["FSY"]
         sim1=temp[1]
@@ -438,6 +454,7 @@ def get_bot_response():
                 temp[2]=psym2
                 session["FSY"]=temp
             if sim2==0:
+                print("HEREE")
                 psym2=psym1
                 temp=session["SSY"]
                 temp[2]=psym1
@@ -496,7 +513,7 @@ def get_bot_response():
             session['step']="for_dis"
     if session['step']=="for_dis":
         diseases=session["diseases"]
-        if len(diseases)<0 or len(possible_diseases(session["all"]))<=1:
+        if len(diseases)<=0 or len(possible_diseases(session["all"]))<=1:
             session['step']='PREDICT'
         else:
             session["dis"]=diseases[0]
@@ -516,7 +533,7 @@ def get_bot_response():
             session['step']="Q_C" #test if user want to continue the conversation or not
             return "can you specify more what you feel or type q to stop the conversation"
     if session['step']=="Description":
-        y = {"Name":session["name"],"Age": session["age"],"Gender": session["gender"],"Disease":session["disease"],"Sympts":session["all"]}
+        y = {"Name":session["name"],"Age":session["age"],"Gender":session["gender"],"Disease":session["disease"],"Sympts":session["all"]}
         write_json(y)
         session['step']="Severity"
         if session["disease"] in description_list.keys():
@@ -542,9 +559,13 @@ def get_bot_response():
         return "do you need another medical consultation (yes or no)? "
     if session['step']=="BYE":
         name=session["name"]
+        age=session["age"]
+        gender=session["gender"]
         session.clear()
         if s =="yes":
+            session["gender"]=gender
             session["name"]=name
+            session["age"]=age
             session['step']="FS"
             return "HELLO again Mr/Ms "+session["name"]+" Please tell me your main symptom. "
         else:
@@ -559,4 +580,4 @@ if __name__ == "__main__":
     ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k = S))    
     #chat_sp()
     app.secret_key = str(ran)   
-    app.run(debug=True)
+    app.run()
