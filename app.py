@@ -15,8 +15,8 @@ app = Flask(__name__)
 nlp = spacy.load('en_core_web_sm')
 j=0
 #read pd
-df_tr=pd.read_csv('Medical_dataset/NEWTRAIN.csv')
-df_tt=pd.read_csv('Medical_dataset/NEWTEST.csv')
+df_tr=pd.read_csv('Medical_dataset/Training.csv')
+df_tt=pd.read_csv('Medical_dataset/Testing.csv')
 symp=[]
 disease=[]
 for i in range(len(df_tr)):
@@ -171,7 +171,7 @@ def possible_diseases(l):
 import joblib
 
 # Prediction Model 
-knn_clf=joblib.load('knn_full.pkl')  
+knn_clf=joblib.load('knn.pkl')  
 ## SEVERITY / DESCRIPTION / PRECAUTION
 severityDictionary=dict()
 description_list = dict()
@@ -296,6 +296,7 @@ def get_bot_response():
         session['step']="FS"  # first symp
         return "Please tell me your main symptom ?"
     if session['step']=="FS":
+        print("there")
         sym1 = s
         sym1=preprocess_sym(sym1)
         sim1,psym1=check_pattern(sym1,all_symp_pr)
@@ -311,7 +312,7 @@ def get_bot_response():
             if s!=0:
                 return s
         else:
-            return "Could you be more specific about the symptom you are suffering from ?" 
+            return "You are probably facing another symptom, can you specify it?"
     if session['step']=="RS1":
         temp=session['FSY']
         psym1=temp[2]
