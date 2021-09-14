@@ -6,6 +6,19 @@
             "Gender": "Full Time",
             "Disease": "",
             "Sympts": ""
+<<<<<<< HEAD
+=======
+        },
+        {
+            "Name": "zzak",
+            "Age": 21,
+            "Gender": "Male",
+            "Disease": "AIDS",
+            "Sympts": [
+                "vomiting",
+                "high_fever"
+            ]
+>>>>>>> eba518c3d4a1be0777cf4c9a46eb0259917b70c3
         }
     ]
 }

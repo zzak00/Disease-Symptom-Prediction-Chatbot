@@ -311,8 +311,11 @@ def get_bot_response():
             s=related_sym(psym1)
             if s!=0:
                 return s
+<<<<<<< HEAD
         else:
             return "You are probably facing another symptom, can you specify it?"
+=======
+>>>>>>> eba518c3d4a1be0777cf4c9a46eb0259917b70c3
     if session['step']=="RS1":
         temp=session['FSY']
         psym1=temp[2]
