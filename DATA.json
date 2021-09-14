@@ -1,78 +1,20 @@
 {
     "users": [
         {
-            "Name": "ismail",
-            "Age": 18,
-            "Gender": "male",
-            "Disease": "Fungal infection",
-            "Sympts": [
-                "itching",
-                "skin_rash",
-                "dischromic _patches"
-            ]
+            "Name": "Nikhil",
+            "Age": "nikhil@geeksforgeeks.org",
+            "Gender": "Full Time",
+            "Disease": "",
+            "Sympts": ""
         },
         {
             "Name": "zzak",
             "Age": 21,
             "Gender": "Male",
-            "Disease": "Paralysis (brain hemorrhage)",
+            "Disease": "AIDS",
             "Sympts": [
-                "headache",
-                "nausea and vomiting"
-            ]
-        },
-        {
-            "Name": "zzak00",
-            "Age": 22,
-            "Gender": "M",
-            "Disease": "Fungal infection",
-            "Sympts": [
-                "itching",
-                "skin_rash",
-                "dischromic _patches"
-            ]
-        },
-        {
-            "Name": "lion",
-            "Age": 21,
-            "Gender": "M",
-            "Disease": "Fungal infection",
-            "Sympts": [
-                "itching",
-                "skin_rash",
-                "dischromic _patches"
-            ]
-        },
-        {
-            "Name": "lion",
-            "Age": 21,
-            "Gender": "Male",
-            "Disease": "Fungal infection",
-            "Sympts": [
-                "itching",
-                "dischromic _patches"
-            ]
-        },
-        {
-            "Name": "ok",
-            "Age": 12,
-            "Gender": "m",
-            "Disease": "Fungal infection",
-            "Sympts": [
-                "itching",
-                "skin_rash",
-                "dischromic _patches"
-            ]
-        },
-        {
-            "Name": "zzak",
-            "Age": 21,
-            "Gender": "M",
-            "Disease": "Fungal infection",
-            "Sympts": [
-                "itching",
-                "skin_rash",
-                "dischromic _patches"
+                "vomiting",
+                "high_fever"
             ]
         }
     ]
