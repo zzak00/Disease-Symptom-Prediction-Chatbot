@@ -240,6 +240,8 @@ getDescription()
 
 
 def related_sym(psym1):
+    if len(psym1)==1:
+        return psym1[0]
     s="searches related to input: <br>"
     i=len(s)
     for num,it in enumerate(psym1):
@@ -306,7 +308,7 @@ def get_bot_response():
         print("there")
         sym1 = s
         sym1=preprocess_sym(sym1)
-        sim1,psym1=check_pattern(sym1,all_symp_pr)
+        sim1,psym1=syntactic_similarity(sym1,all_symp_pr)
         temp=[]
         temp.append(sym1)
         temp.append(sim1)
@@ -334,7 +336,7 @@ def get_bot_response():
         sim2=0
         psym2=[]
         if len(sym2)!=0:
-            sim2,psym2=check_pattern(sym2,all_symp_pr) 
+            sim2,psym2=syntactic_similarity(sym2,all_symp_pr) 
         temp=[]
         temp.append(sym2)
         temp.append(sim2)
