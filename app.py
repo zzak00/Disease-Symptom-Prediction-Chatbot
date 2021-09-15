@@ -300,10 +300,10 @@ def get_bot_response():
         session["step"]="Depart"
     if session['step']=="Depart":
         session['step']="BFS" 
-        return "Hello Mr/Ms "+session["name"]+", I will ask a few questions about your symptoms to see what you should do. Tap S to start diagnostic"    
+        return "Well, Hello agin Mr/Ms "+session["name"]+", Now I will be ask few questions about your symptoms to see what you should do. Tap S to start diagnostic!"    
     if session['step']=="BFS":
         session['step']="FS"  # first symp
-        return "Please tell me your main symptom ?"
+        return "Can you precise your main symptom Mr/Ms "+session["name"]
     if session['step']=="FS":
         print("there")
         sym1 = s
@@ -320,8 +320,6 @@ def get_bot_response():
             s=related_sym(psym1)
             if s!=0:
                 return s
-        else:
-            return "You are probably facing another symptom, can you specify it?"
     if session['step']=="RS1":
         temp=session['FSY']
         psym1=temp[2]
@@ -329,7 +327,7 @@ def get_bot_response():
         temp[2]=psym1
         session['FSY']=temp
         session['step']='SS'
-        return "You are probably facing another symptom, can you specify it?"
+        return "You are probably facing another symptom, if so, can you specify it?"
     if session['step']=="SS":
         sym2 = s
         sym2=preprocess_sym(sym2)
@@ -400,7 +398,7 @@ def get_bot_response():
                 session["suggested"]=suggest_syn(sym1)
                 sugg=session["suggested"]
             if len(sugg)>0:
-                msg="Do you feel "+sugg[0]+"?"
+                msg="are you experiencing any  "+sugg[0]+"?"
                 return msg
         if "suggested" in session:
             del session["suggested"]
@@ -525,7 +523,7 @@ def get_bot_response():
             session['step']="for_dis"
     if session['step']=="for_dis":
         diseases=session["diseases"]
-        if len(diseases)<=0 or len(possible_diseases(session["all"]))<=1:
+        if len(diseases)<=0 or len(possi    le_diseases(session["all"]))<=1:
             session['step']='PREDICT'
         else:
             session["dis"]=diseases[0]
@@ -540,7 +538,7 @@ def get_bot_response():
         if result!=None:
             session['step']="Description"
             session["disease"]=result[0]
-            return "Well Mr/Ms "+session["name"]+", you may have "+result[0]+" type D to get a description of the disease ."
+            return "Well Mr/Ms "+session["name"]+", you may have "+result[0]+". Type D to get a description of the disease ."
         else:
             session['step']="Q_C" #test if user want to continue the conversation or not
             return "can you specify more what you feel or type q to stop the conversation"
@@ -549,7 +547,7 @@ def get_bot_response():
         write_json(y)
         session['step']="Severity"
         if session["disease"] in description_list.keys():
-            return description_list[session["disease"]]+" \n <br> how many day do you feel those symptoms ?"
+            return description_list[session["disease"]]+" \n <br>  How many days have you had symptoms?"
         else:
             if " " in session["disease"]:
                 session["disease"]=session["disease"].replace(" ","_")
@@ -559,7 +557,7 @@ def get_bot_response():
         if calc_condition(session["all"],int(s))==1:
             return "you should take the consultation from doctor <br> (type q to end)"
         else:
-            msg='Take following precautions :<br> ' 
+            msg='Nothing to worry about, but you should take the following precautions :<br> ' 
             i=1
             for e in precautionDictionary[session["disease"]]:
                 msg+='\n '+str(i)+'->'+e+'<br>'
@@ -568,13 +566,13 @@ def get_bot_response():
             return msg
     if session['step']=="FINAL":
         session['step']="BYE"
-        return "do you need another medical consultation (yes or no)? "
+        return "Your diagnosis was perfectly completed. Do you need another medical consultation (yes or no)? "
     if session['step']=="BYE":
         name=session["name"]
         age=session["age"]
         gender=session["gender"]
         session.clear()
-        if s =="yes":
+        if s.lower() =="yes":
             session["gender"]=gender
             session["name"]=name
             session["age"]=age
