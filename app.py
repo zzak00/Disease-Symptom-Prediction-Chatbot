@@ -240,8 +240,6 @@ getDescription()
 
 
 def related_sym(psym1):
-    if len(psym1)==1:
-        return psym1[0]
     s="searches related to input: <br>"
     i=len(s)
     for num,it in enumerate(psym1):
@@ -300,10 +298,10 @@ def get_bot_response():
         session["step"]="Depart"
     if session['step']=="Depart":
         session['step']="BFS" 
-        return "Well, Hello agin Mr/Ms "+session["name"]+", Now I will be ask few questions about your symptoms to see what you should do. Tap S to start diagnostic!"    
+        return "Well, Hello again Mr/Ms "+session["name"]+", now I will be asking some few questions about your symptoms to see what you should do. Tap S to start diagnostic!"    
     if session['step']=="BFS":
         session['step']="FS"  # first symp
-        return "Can you precise your main symptom Mr/Ms "+session["name"]
+        return "Can you precise your main symptom Mr/Ms "+session["name"]+" ?"
     if session['step']=="FS":
         print("there")
         sym1 = s
@@ -344,7 +342,7 @@ def get_bot_response():
         if sim2==1:
             session['step']="RS2" #related sym2            
             s=related_sym(psym2)
-            if s!=0:
+            if s!=0 :
                 return s
     if session['step']=="RS2":
         temp=session['SSY']
@@ -523,7 +521,7 @@ def get_bot_response():
             session['step']="for_dis"
     if session['step']=="for_dis":
         diseases=session["diseases"]
-        if len(diseases)<=0 or len(possi    le_diseases(session["all"]))<=1:
+        if len(diseases)<=0 or len(possible_diseases(session["all"]))<=1:
             session['step']='PREDICT'
         else:
             session["dis"]=diseases[0]
