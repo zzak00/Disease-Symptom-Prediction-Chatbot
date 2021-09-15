@@ -36,7 +36,7 @@ def preprocess(doc):
     nlp_doc=nlp(doc)
     d=[]
     for token in nlp_doc:
-        if(not token.text.lower()  in STOP_WORDS and  token.text.isalpha() and token.tag_ in ("JJ","NN","VBG","NNS")):
+        if(not token.text.lower()  in STOP_WORDS and  token.text.isalpha() ):
             d.append(token.lemma_.lower() )
     return ' '.join(d)
 
