@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-from nltk.corpus import wordnet as wn 
 import csv
 from spacy.lang.en.stop_words import STOP_WORDS
 import spacy
@@ -13,7 +12,6 @@ from flask import Flask, render_template, request,session
 
 app = Flask(__name__)
 nlp = spacy.load('en_core_web_sm')
-j=0
 #read pd
 df_tr=pd.read_csv('Medical_dataset/Training.csv')
 df_tt=pd.read_csv('Medical_dataset/Testing.csv')
@@ -66,15 +64,24 @@ def jaccard_set(str1, str2):
     return float(intersection) / union
 
 # Jaccard --> Corpus
+#similarite syn avec ts le corpus
 def syntactic_similarity(symp_t,corpus):
-    max_sim=0
-    most_sim=None
+    most_sim=[]
+    poss_sym=[]
     for symp in corpus:
         d=jaccard_set(symp_t,symp)
-        if d>max_sim:
-            most_sim=symp
-            max_sim=d
-    return max_sim,most_sim
+        most_sim.append(d)
+    order=np.argsort(most_sim)[::-1].tolist()
+    for i in order:
+        if corpus[i] in symp_t:
+            return 1,[corpus[i]]
+        if corpus[i] not in poss_sym and most_sim[i]!=0:
+            poss_sym.append(corpus[i])
+    if len(poss_sym):
+        return 1,poss_sym
+    else: return 0,None
+    
+
 
 
 # Regular expression check
@@ -171,7 +178,7 @@ def possible_diseases(l):
 import joblib
 
 # Prediction Model 
-knn_clf=joblib.load('knn.pkl')  
+knn_clf=joblib.load('model/knn.pkl')  
 ## SEVERITY / DESCRIPTION / PRECAUTION
 severityDictionary=dict()
 description_list = dict()
