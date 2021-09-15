@@ -6,16 +6,6 @@
             "Gender": "Full Time",
             "Disease": "",
             "Sympts": ""
-        },
-        {
-            "Name": "pronto",
-            "Age": 21,
-            "Gender": "Male",
-            "Disease": "Fungal infection",
-            "Sympts": [
-                "itching",
-                "nodal_skin_eruptions"
-            ]
         }
     ]
 }
