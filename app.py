@@ -318,6 +318,8 @@ def get_bot_response():
             s=related_sym(psym1)
             if s!=0:
                 return s
+        else:
+            return "You are probably facing another symptom, if so, can you specify it?"
     if session['step']=="RS1":
         temp=session['FSY']
         psym1=temp[2]
@@ -477,6 +479,7 @@ def get_bot_response():
         psym2=temp[2]
         print("hey2")
         if "all" not in session:
+            session["asked"]=[]
             print("inside")
             session["all"]=[col_dict[psym1],col_dict[psym2]]
             print(session["all"])
@@ -499,6 +502,7 @@ def get_bot_response():
                 if s=="yes":
                     all_sym.append(symts[0])
                     session["all"]=all_sym
+                    print(possible_diseases(session["all"]))
                 del symts[0]
                 session["symv"]=symts
         if len(possible_diseases(session["all"]))==1:#dernierajout
@@ -506,7 +510,10 @@ def get_bot_response():
         if "symv" not in session :
             session["symv"]=symVONdisease(df_tr, session["dis"])
         if len(session["symv"])>0:
-            if symts[0] not in session["all"]:
+            if symts[0] not in session["all"] and symts[0] not in session["asked"]:
+                asked=session["asked"]
+                asked.append(symts[0])
+                session["asked"]=asked
                 symts=session["symv"]
                 msg="do you feel "+clean_symp(symts[0])+"?"
                 return msg
@@ -515,9 +522,13 @@ def get_bot_response():
                 session["symv"]=symts
                 return get_bot_response()
         else:
+            PD=possible_diseases(session["all"])
             diseases=session["diseases"]
-            del diseases[0]
-            session["diseases"]=diseases
+            if diseases[0] in PD:
+                PD.remove(diseases[0])
+#            diseases=session["diseases"]
+#            del diseases[0]            
+            session["diseases"]=PD
             session['step']="for_dis"
     if session['step']=="for_dis":
         diseases=session["diseases"]
@@ -536,7 +547,7 @@ def get_bot_response():
         if result!=None:
             session['step']="Description"
             session["disease"]=result[0]
-            return "Well Mr/Ms "+session["name"]+", you may have "+result[0]+". Type D to get a description of the disease ."
+            return "Well Mr/Ms "+session["name"]+", you may have "+result[0]+". Tap D to get a description of the disease ."
         else:
             session['step']="Q_C" #test if user want to continue the conversation or not
             return "can you specify more what you feel or Tap q to stop the conversation"
