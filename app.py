@@ -539,7 +539,7 @@ def get_bot_response():
             return "Well Mr/Ms "+session["name"]+", you may have "+result[0]+". Type D to get a description of the disease ."
         else:
             session['step']="Q_C" #test if user want to continue the conversation or not
-            return "can you specify more what you feel or type q to stop the conversation"
+            return "can you specify more what you feel or Tap q to stop the conversation"
     if session['step']=="Description":
         y = {"Name":session["name"],"Age":session["age"],"Gender":session["gender"],"Disease":session["disease"],"Sympts":session["all"]}
         write_json(y)
@@ -553,14 +553,14 @@ def get_bot_response():
     if session['step']=="Severity":
         session['step']='FINAL'
         if calc_condition(session["all"],int(s))==1:
-            return "you should take the consultation from doctor <br> (type q to end)"
+            return "you should take the consultation from doctor <br> Tap q to exit"
         else:
             msg='Nothing to worry about, but you should take the following precautions :<br> ' 
             i=1
             for e in precautionDictionary[session["disease"]]:
-                msg+='\n '+str(i)+'->'+e+'<br>'
+                msg+='\n '+str(i)+' - '+e+'<br>'
                 i+=1
-            msg+=' (Type q to end)'
+            msg+=' Tap q to end'
             return msg
     if session['step']=="FINAL":
         session['step']="BYE"

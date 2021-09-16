@@ -6,6 +6,26 @@
             "Gender": "Full Time",
             "Disease": "",
             "Sympts": ""
+        },
+        {
+            "Name": "zzak",
+            "Age": 21,
+            "Gender": "M",
+            "Disease": "Fungal infection",
+            "Sympts": [
+                "itching",
+                "nodal_skin_eruptions"
+            ]
+        },
+        {
+            "Name": "abder",
+            "Age": 21,
+            "Gender": "M",
+            "Disease": "Fungal infection",
+            "Sympts": [
+                "itching",
+                "nodal_skin_eruptions"
+            ]
         }
     ]
 }
