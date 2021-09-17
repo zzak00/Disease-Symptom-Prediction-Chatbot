@@ -4,7 +4,6 @@ import csv
 from spacy.lang.en.stop_words import STOP_WORDS
 import spacy
 from nltk.wsd import lesk
-from nltk.tokenize import word_tokenize
 from itertools import chain
 from nltk.corpus import wordnet
 import joblib
@@ -63,7 +62,7 @@ def jaccard_set(str1, str2):
     union = (len(list1) + len(list2)) - intersection
     return float(intersection) / union
 
-# Jaccard --> Corpus
+#apply Jaccard to Corpus and sort result
 #similarite syn avec ts le corpus
 def syntactic_similarity(symp_t,corpus):
     most_sim=[]
@@ -116,7 +115,8 @@ def semanticD(doc1,doc2):
             syn1 = WSD(tock1,doc1)
             syn2 = WSD(tock2,doc2)
             if syn1 is not None and syn2 is not None :
-                x=syn1.path_similarity(syn2)
+                #x=syn1.path_similarity(syn2)
+                x=syn1.wup(syn2)
                 if x is not None and x>0.25:
                     score+=x
     return score/(len(doc1_p)*len(doc2_p))
