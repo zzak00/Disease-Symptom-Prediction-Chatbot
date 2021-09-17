@@ -10,7 +10,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import json
 
-with open('Medical_dataset/intents_short.json', 'r') as f:
+with open('../Medical_dataset/intents_short.json', 'r') as f:
     intents = json.load(f)
     
 intents
@@ -20,7 +20,7 @@ nltk.download('stopwords')
 
 
 lemmatizer = WordNetLemmatizer()
-knn= joblib.load('knn.pkl')  
+knn= joblib.load('../model/knn.pkl')  
 
 # preprocess sentence
 def preprocess_sent(sent):
@@ -95,7 +95,7 @@ precautionDictionary=dict()
 
 def getDescription():
     global description_list
-    with open('Medical_dataset/symptom_Description.csv') as csv_file:
+    with open('../Medical_dataset/symptom_Description.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         for row in csv_reader:
             _description={row[0]:row[1]}
@@ -103,7 +103,7 @@ def getDescription():
 
 def getSeverityDict():
     global severityDictionary
-    with open('Medical_dataset/symptom_severity.csv') as csv_file:
+    with open('../Medical_dataset/symptom_severity.csv') as csv_file:
 
         csv_reader = csv.reader(csv_file, delimiter=',')
         try:
@@ -115,7 +115,7 @@ def getSeverityDict():
 
 def getprecautionDict():
     global precautionDictionary
-    with open('Medical_dataset/symptom_precaution.csv') as csv_file:
+    with open('../Medical_dataset/symptom_precaution.csv') as csv_file:
 
         csv_reader = csv.reader(csv_file, delimiter=',')
         for row in csv_reader:
@@ -137,8 +137,8 @@ getSeverityDict()
 getprecautionDict()
 getDescription()
 # read TF IDF symptoms and Training diseases
-df=pd.read_csv('Medical_dataset/tfidfsymptoms.csv')
-df_tr=pd.read_csv('Medical_dataset/Training.csv')
+df=pd.read_csv('../Medical_dataset/tfidfsymptoms.csv')
+df_tr=pd.read_csv('../Medical_dataset/Training.csv')
 vocab=list(df.columns)
 disease=df_tr.iloc[:,-1].to_list()
 all_symp_col=list(df_tr.columns[:-1])
