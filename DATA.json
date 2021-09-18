@@ -6,63 +6,6 @@
             "Gender": "Full Time",
             "Disease": "",
             "Sympts": ""
-        },
-        {
-<<<<<<< HEAD
-            "Name": "zzak",
-            "Age": 21,
-            "Gender": "M",
-            "Disease": "Fungal infection",
-            "Sympts": [
-                "itching",
-                "nodal_skin_eruptions"
-            ]
-        },
-        {
-            "Name": "abder",
-            "Age": 21,
-            "Gender": "M",
-            "Disease": "Fungal infection",
-            "Sympts": [
-                "itching",
-                "nodal_skin_eruptions"
-=======
-            "Name": "idon'tknow",
-            "Age": 120,
-            "Gender": "Male",
-            "Disease": "Fungal infection",
-            "Sympts": [
-                "mild_fever",
-                "itching"
-            ]
-        },
-        {
-            "Name": "s",
-            "Age": 12,
-            "Gender": "male",
-            "Disease": "Jaundice",
-            "Sympts": [
-                "fatigue",
-                "itching",
-                "dark_urine",
-                "yellow_urine"
-            ]
-        },
-        {
-            "Name": "s",
-            "Age": 12,
-            "Gender": "male",
-            "Disease": "Jaundice",
-            "Sympts": [
-                "high_fever",
-                "fatigue",
-                "vomiting",
-                "high_fever",
-                "yellowish_skin",
-                "dark_urine",
-                "nausea"
->>>>>>> 900faa029adbce6a67708347a68433b7b65659f3
-            ]
         }
     ]
 }

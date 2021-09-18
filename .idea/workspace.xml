@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1ebca67a-babf-4eb7-aeca-c3780c899c84" name="Changes" comment="" />
+    <list default="true" id="1ebca67a-babf-4eb7-aeca-c3780c899c84" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/DATA.json" beforeDir="false" afterPath="$PROJECT_DIR$/DATA.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ROBO_DOC  .ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/ROBO_DOC  .ipynb" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
