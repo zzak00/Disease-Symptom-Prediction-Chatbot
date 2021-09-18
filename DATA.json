@@ -1,1 +1,11 @@
-{"users": []}
+{
+    "users": [
+        {
+            "Name": "Nikhil",
+            "Age": "nikhil@geeksforgeeks.org",
+            "Gender": "Full Time",
+            "Disease": "",
+            "Sympts": ""
+        }
+    ]
+}
