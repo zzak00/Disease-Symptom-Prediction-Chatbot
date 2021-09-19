@@ -1,1 +1,16 @@
-{"users": []}
+{
+    "users": [
+        {
+            "Name": "zzak",
+            "Age": 21,
+            "Gender": "Male",
+            "Disease": "Fungal infection",
+            "Sympts": [
+                "itching",
+                "itching",
+                "skin_rash",
+                "nodal_skin_eruptions"
+            ]
+        }
+    ]
+}
