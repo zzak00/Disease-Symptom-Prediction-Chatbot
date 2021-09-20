@@ -547,16 +547,13 @@ def get_bot_response():
         print("hey3")
         print(session["diseases"])
         all_sym = session["all"]
-        if len(session["diseases"]) <= 1:
-            session['step'] = "PREDICT"
-        else:
-            diseases = session["diseases"]
-            dis = diseases[0]
-            session["dis"] = dis
-            session['step'] = "for_dis"
+        diseases = session["diseases"]
+        dis = diseases[0]
+        session["dis"] = dis
+        session['step'] = "for_dis"
     if session['step'] == "DIS":
         if "symv" in session:
-            if len(s) > 0:
+            if len(s) > 0 and len(session["symv"])>0:
                 symts = session["symv"]
                 all_sym = session["all"]
                 if s == "yes":
@@ -565,8 +562,6 @@ def get_bot_response():
                     print(possible_diseases(session["all"]))
                 del symts[0]
                 session["symv"] = symts
-        if len(possible_diseases(session["all"])) == 1:  # dernierajout
-            session["symv"] = []  # dernier ajout
         if "symv" not in session:
             session["symv"] = symVONdisease(df_tr, session["dis"])
         if len(session["symv"]) > 0:
@@ -580,11 +575,14 @@ def get_bot_response():
             else:
                 del symts[0]
                 session["symv"] = symts
+                s=""
+                print("HANAAA")
                 return get_bot_response()
         else:
             PD = possible_diseases(session["all"])
             diseases = session["diseases"]
             if diseases[0] in PD:
+                session["testpred"]=diseases[0]
                 PD.remove(diseases[0])
             #            diseases=session["diseases"]
             #            del diseases[0]
@@ -592,7 +590,7 @@ def get_bot_response():
             session['step'] = "for_dis"
     if session['step'] == "for_dis":
         diseases = session["diseases"]
-        if len(diseases) <= 0 or len(possible_diseases(session["all"])) <= 1:
+        if len(diseases) <= 0 :
             session['step'] = 'PREDICT'
         else:
             session["dis"] = diseases[0]
@@ -605,6 +603,9 @@ def get_bot_response():
         session['step'] = "END"
     if session['step'] == "END":
         if result != None:
+            if result[0]!=session["testpred"]:
+                session['step']="Q_C"
+                return "as you provide me with few symptoms i am sorry to announce that. I cannot predict your disease for the moment!!! <br> can you specify more what you feel or Tap q to stop the conversation"
             session['step'] = "Description"
             session["disease"] = result[0]
             return "Well Mr/Ms " + session["name"] + ", you may have " + result[
