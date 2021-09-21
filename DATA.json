@@ -6,10 +6,8 @@
             "Gender": "Male",
             "Disease": "Fungal infection",
             "Sympts": [
-                "itching",
-                "itching",
                 "skin_rash",
-                "nodal_skin_eruptions"
+                "dischromic _patches"
             ]
         }
     ]

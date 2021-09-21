@@ -68,7 +68,7 @@ all_symp_pr = [preprocess(sym) for sym in all_symp]
 col_dict = dict(zip(all_symp_pr, all_symp_col))
 
 
-# II- Syntactic Similarity
+# II- Syntaxic Similarity
 
 # Returns all the subsets of a set. This is a generator.
 # {1,2,3}->[{},{1},{2},{3},{1,3},{1,2},..]
@@ -130,7 +130,7 @@ def syntactic_similarity(symp_t, corpus):
         most_sim.append(d)
     order = np.argsort(most_sim)[::-1].tolist()
     for i in order:
-        if DoesExist(corpus[i]):
+        if DoesExist(symp_t):
             return 1, [corpus[i]]
         if corpus[i] not in poss_sym and most_sim[i] != 0:
             poss_sym.append(corpus[i])
