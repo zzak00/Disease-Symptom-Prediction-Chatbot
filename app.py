@@ -68,7 +68,7 @@ all_symp_pr = [preprocess(sym) for sym in all_symp]
 col_dict = dict(zip(all_symp_pr, all_symp_col))
 
 
-# II- Syntaxic Similarity
+# II- Syntactic Similarity
 
 # Returns all the subsets of a set. This is a generator.
 # {1,2,3}->[{},{1},{2},{3},{1,3},{1,2},..]
@@ -310,7 +310,7 @@ def calc_condition(exp, days):
 
 # print possible symptoms
 def related_sym(psym1):
-    s = "searches related to input: <br>"
+    s = "could you be more specific, <br>"
     i = len(s)
     for num, it in enumerate(psym1):
         s += str(num) + ") " + clean_symp(it) + "<br>"
