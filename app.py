@@ -130,7 +130,7 @@ def syntactic_similarity(symp_t, corpus):
         most_sim.append(d)
     order = np.argsort(most_sim)[::-1].tolist()
     for i in order:
-        if DoesExist(corpus[i]):
+        if DoesExist(symp_t):
             return 1, [corpus[i]]
         if corpus[i] not in poss_sym and most_sim[i] != 0:
             poss_sym.append(corpus[i])
@@ -310,7 +310,7 @@ def calc_condition(exp, days):
 
 # print possible symptoms
 def related_sym(psym1):
-    s = "searches related to input: <br>"
+    s = "could you be more specific, <br>"
     i = len(s)
     for num, it in enumerate(psym1):
         s += str(num) + ") " + clean_symp(it) + "<br>"
