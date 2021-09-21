@@ -1,1 +1,15 @@
-{"users": []}
+{
+    "users": [
+        {
+            "Name": "toto",
+            "Age": 21,
+            "Gender": "Male",
+            "Disease": "Fungal infection",
+            "Sympts": [
+                "itching",
+                "dischromic _patches",
+                "nodal_skin_eruptions"
+            ]
+        }
+    ]
+}
