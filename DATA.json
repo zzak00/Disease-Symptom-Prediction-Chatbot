@@ -1,1 +1,14 @@
-{"users": []}
+{
+    "users": [
+        {
+            "Name": "zzak",
+            "Age": 21,
+            "Gender": "Male",
+            "Disease": "Fungal infection",
+            "Sympts": [
+                "skin_rash",
+                "dischromic _patches"
+            ]
+        }
+    ]
+}
