@@ -498,7 +498,7 @@ def get_bot_response():
                 session["suggested_2"] = suggest_syn(sym2)
                 sugg = session["suggested_2"]
             if len(sugg) > 0:
-                msg = "Do you feel " + sugg[0] + "?"
+                msg = "Are you experiencing " + sugg[0] + "?"
                 session["suggested_2"] = sugg
                 return msg
         if "suggested_2" in session:
@@ -570,7 +570,7 @@ def get_bot_response():
                 asked.append(symts[0])
                 session["asked"] = asked
                 symts = session["symv"]
-                msg = "do you feel " + clean_symp(symts[0]) + "?"
+                msg = "Are you experiencing " + clean_symp(symts[0]) + "?"
                 return msg
             else:
                 del symts[0]
