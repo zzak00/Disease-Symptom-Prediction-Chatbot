@@ -605,7 +605,7 @@ def get_bot_response():
         if result != None:
             if result[0]!=session["testpred"]:
                 session['step']="Q_C"
-                return "as you provide me with few symptoms i am sorry to announce that. I cannot predict your disease for the moment!!! <br> can you specify more what you feel or Tap q to stop the conversation"
+                return "as you provide me with few symptoms, I am sorry to announce that I cannot predict your disease for the moment!!! <br> Can you specify more about what you are feeling or Tap q to stop the conversation"
             session['step'] = "Description"
             session["disease"] = result[0]
             return "Well Mr/Ms " + session["name"] + ", you may have " + result[
@@ -651,7 +651,7 @@ def get_bot_response():
             session['step'] = "FS"
             return "HELLO again Mr/Ms " + session["name"] + " Please tell me your main symptom. "
         else:
-            return "THANKS Mr/Ms " + name + " for using ower app for more information please contact <b> +21266666666</b>"
+            return "THANKS Mr/Ms " + name + " for using me for more information please contact <b> +21266666666</b>"
 
 
 if __name__ == "__main__":
