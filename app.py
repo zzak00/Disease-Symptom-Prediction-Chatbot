@@ -363,14 +363,10 @@ def get_bot_response():
         session['step'] = "FS"  # first symp
         return "Can you precise your main symptom Mr/Ms " + session["name"] + " ?"
     if session['step'] == "FS":
-        print("there")
         sym1 = s
         sym1 = preprocess(sym1)
         sim1, psym1 = syntactic_similarity(sym1, all_symp_pr)
-        temp = []
-        temp.append(sym1)
-        temp.append(sim1)
-        temp.append(psym1)
+        temp = [sym1, sim1, psym1]
         session['FSY'] = temp  # info du 1er symptome
         session['step'] = "SS"  # second symptomee
         if sim1 == 1:
@@ -395,10 +391,7 @@ def get_bot_response():
         psym2 = []
         if len(sym2) != 0:
             sim2, psym2 = syntactic_similarity(sym2, all_symp_pr)
-        temp = []
-        temp.append(sym2)
-        temp.append(sim2)
-        temp.append(psym2)
+        temp = [sym2, sim2, psym2]
         session['SSY'] = temp  # info du 2eME symptome(sym,sim,psym)
         session['step'] = "semantic"  # face semantic
         if sim2 == 1:
@@ -423,7 +416,6 @@ def get_bot_response():
         if sim1 == 0 or sim2 == 0:
             session['step'] = "BFsim1=0"
         else:
-            print("hey1")
             session['step'] = 'PD'  # to possible_diseases
     if session['step'] == "BFsim1=0":
         if sim1 == 0 and len(sym1) != 0:
@@ -437,7 +429,6 @@ def get_bot_response():
         else:
             session['step'] = "BFsim2=0"
     if session['step'] == "sim1=0":  # semantic no => suggestion
-        print("innnn")
         temp = session["FSY"]
         sym1 = temp[0]
         sim1 = temp[1]
@@ -522,7 +513,6 @@ def get_bot_response():
                 temp[2] = psym2
                 session["FSY"] = temp
             if sim2 == 0:
-                print("HEREE")
                 psym2 = psym1
                 temp = session["SSY"]
                 temp[2] = psym1
@@ -540,11 +530,9 @@ def get_bot_response():
         print("hey2")
         if "all" not in session:
             session["asked"] = []
-            print("inside")
             session["all"] = [col_dict[psym1], col_dict[psym2]]
             print(session["all"])
         session["diseases"] = possible_diseases(session["all"])
-        print("hey3")
         print(session["diseases"])
         all_sym = session["all"]
         diseases = session["diseases"]
@@ -553,7 +541,7 @@ def get_bot_response():
         session['step'] = "for_dis"
     if session['step'] == "DIS":
         if "symv" in session:
-            if len(s) > 0 and len(session["symv"])>0:
+            if len(s) > 0 and len(session["symv"]) > 0:
                 symts = session["symv"]
                 all_sym = session["all"]
                 if s == "yes":
@@ -575,14 +563,14 @@ def get_bot_response():
             else:
                 del symts[0]
                 session["symv"] = symts
-                s=""
+                s = ""
                 print("HANAAA")
                 return get_bot_response()
         else:
             PD = possible_diseases(session["all"])
             diseases = session["diseases"]
             if diseases[0] in PD:
-                session["testpred"]=diseases[0]
+                session["testpred"] = diseases[0]
                 PD.remove(diseases[0])
             #            diseases=session["diseases"]
             #            del diseases[0]
@@ -590,7 +578,7 @@ def get_bot_response():
             session['step'] = "for_dis"
     if session['step'] == "for_dis":
         diseases = session["diseases"]
-        if len(diseases) <= 0 :
+        if len(diseases) <= 0:
             session['step'] = 'PREDICT'
         else:
             session["dis"] = diseases[0]
@@ -602,10 +590,12 @@ def get_bot_response():
         result = knn_clf.predict(OHV(session["all"], all_symp_col))
         session['step'] = "END"
     if session['step'] == "END":
-        if result != None:
-            if result[0]!=session["testpred"]:
-                session['step']="Q_C"
-                return "as you provide me with few symptoms, I am sorry to announce that I cannot predict your disease for the moment!!! <br> Can you specify more about what you are feeling or Tap q to stop the conversation"
+        if result is not None:
+            if result[0] != session["testpred"]:
+                session['step'] = "Q_C"
+                return "as you provide me with few symptoms, I am sorry to announce that I cannot predict your " \
+                       "disease for the moment!!! <br> Can you specify more about what you are feeling or Tap q to " \
+                       "stop the conversation "
             session['step'] = "Description"
             session["disease"] = result[0]
             return "Well Mr/Ms " + session["name"] + ", you may have " + result[
