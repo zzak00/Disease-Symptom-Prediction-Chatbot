@@ -10,9 +10,9 @@ Healthcare chatbot to predict Diseases based on patient symptoms.
 virtualenv venv 
 
 ## activate it and install reqs
-source venv/bin/activate
-pip install -r requirements.txt 
-python -m spacy download en_core_web_sm
+- source venv/bin/activate
+- pip install -r requirements.txt 
+- python -m spacy download en_core_web_sm
 
 ## run app file
 python app.py
